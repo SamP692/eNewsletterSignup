@@ -10,6 +10,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const submissionController = require('./db/submissionController');
 
 const app = express();
 
@@ -35,6 +36,8 @@ app.use(express.static(path.join(__dirname, '/dist')));
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
+app.use('/new', submissionController);
 
 const port = process.env.PORT;
 app.listen(port, () => {
